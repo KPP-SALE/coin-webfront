@@ -3,6 +3,7 @@ import React, { useState, useCallback, useMemo, useRef } from 'react';
 import faker from 'faker/locale/ko';
 
 import Table from './Table';
+import WebSocketTest from './WebSocketTest';
 
 faker.seed(100);
 function App() {
@@ -36,7 +37,12 @@ function App() {
     []
   );
 
-  return <Table columns={columns} data={data} />;
+  return (
+    <div>
+      <WebSocketTest />
+      <Table columns={columns} data={data} />
+    </div>
+  );
 }
 
 export default App;
