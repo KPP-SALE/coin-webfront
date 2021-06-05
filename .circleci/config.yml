@@ -29,6 +29,9 @@ jobs:
       # - node/install-packages:
       #     pkg-manager: yarn 
       - run:
+          name: Run build
+          command: npm build
+      - run:
           name: Run tests
           command: npm test
 
