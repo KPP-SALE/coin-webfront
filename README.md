@@ -1,4 +1,5 @@
 # Getting Started with Create React App
+[![CircleCI](https://circleci.com/gh/SeaFalcon/coin-webfront/tree/master.svg?style=svg)](https://circleci.com/gh/SeaFalcon/coin-webfront/tree/master)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
