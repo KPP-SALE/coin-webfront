@@ -4,6 +4,7 @@ import faker from 'faker/locale/ko';
 
 import Table from './Table';
 import WebSocketTest from './WebSocketTest';
+import Chat from './Chat';
 
 faker.seed(100);
 function App() {
@@ -40,6 +41,7 @@ function App() {
   return (
     <div>
       <WebSocketTest />
+      <Chat></Chat>
       <Table columns={columns} data={data} />
     </div>
   );
