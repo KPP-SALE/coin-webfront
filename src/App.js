@@ -6,6 +6,7 @@ import Table from './Table';
 import WebSocketTest from './WebSocketTest';
 import Chat from './Chat';
 import Chart from './Chart';
+import CandleStick from './CandleStick';
 
 faker.seed(100);
 function App() {
@@ -43,7 +44,8 @@ function App() {
     <div>
       <WebSocketTest />
       <Chat></Chat>
-      <Chart></Chart>
+      {/* <Chart></Chart> */}
+      <CandleStick></CandleStick>
       <Table columns={columns} data={data} />
     </div>
   );
