@@ -44,7 +44,7 @@ jobs:
                       "type": "section",
                       "text": {
                           "type": "mrkdwn",
-                          "text": "🎉 빌드 및 업로드 성공! Docker 배포 진행중.."
+                          "text": "Success Build & Test"
                       }
                   }
                ]
