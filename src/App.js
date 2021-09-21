@@ -4,6 +4,7 @@ import faker from 'faker/locale/ko';
 
 import Table from './Table';
 import WebSocketTest from './WebSocketTest';
+import StompTest from './StompTest';
 import Chat from './Chat';
 import Chart from './Chart';
 import CandleStick from './CandleStick';
@@ -42,7 +43,8 @@ function App() {
 
   return (
     <div>
-      <WebSocketTest />
+      {/* <WebSocketTest /> */}
+      <StompTest />
       <Chat></Chat>
       {/* <Chart></Chart> */}
       <CandleStick></CandleStick>
