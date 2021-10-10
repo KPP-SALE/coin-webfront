@@ -81,7 +81,15 @@ export default function CandleStick() {
     const optionsForCandle = {
               chart: {
                 type: 'candlestick',
-                height: 350
+                height: 350,
+                events: {
+                  click: function (event, chartContext, config) {
+                    // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+                    console.log(event);
+                    console.log(chartContext);
+                    console.log(config);
+                  }
+                },
               },
               title: {
                 text: 'CandleStick Chart',

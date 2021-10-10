@@ -8,6 +8,7 @@ import StompTest from './StompTest';
 import Chat from './Chat';
 import Chart from './Chart';
 import CandleStick from './CandleStick';
+import CandleStickApex from './CandleStickApex';
 
 faker.seed(100);
 function App() {
@@ -47,7 +48,8 @@ function App() {
       <StompTest />
       <Chat></Chat>
       {/* <Chart></Chart> */}
-      <CandleStick></CandleStick>
+      {/* <CandleStick></CandleStick> */}
+      <CandleStickApex></CandleStickApex>
       <Table columns={columns} data={data} />
     </div>
   );
