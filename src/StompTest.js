@@ -10,7 +10,7 @@ function StompTest() {
   return (
     <div>
       {/* <SockJsClient url='http://localhost:61613/ws' topics={['/topics/all']} */}
-      <SockJsClient url='http://localhost:4000/chat' topics={['/pub/toclient']}
+      <SockJsClient url='https://14a1-124-61-155-176.ngrok.io/chat' topics={['/pub/toclient']}
         onMessage={(msg) => { console.log(msg); }}
         />
         {/* ref={(client) => { this.clientRef = client }} /> */}
