@@ -47,11 +47,11 @@ export default function CandleStick() {
         //   x: new Date(candleDateTimeKst), open, close, high, low
         // }));
         const newData = data.map(({ close, high, open, low, candleDateTimeKst }, idx) => ({
-          x: new Date(candleDateTimeKst), 
+          x: new Date(candleDateTimeKst),
           y: [open, high, close, low]
         }));
 
-        const seriesData = [{data: newData}];
+        const seriesData = [{ data: newData }];
         console.log(seriesData);
 
         /*
@@ -79,31 +79,75 @@ export default function CandleStick() {
 
     fetchData();
     const optionsForCandle = {
-              chart: {
-                type: 'candlestick',
-                height: 350,
-                events: {
-                  click: function (event, chartContext, config) {
-                    // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
-                    console.log(event);
-                    console.log(chartContext);
-                    console.log(config);
-                  }
-                },
-              },
-              title: {
-                text: 'CandleStick Chart',
-                align: 'left'
-              },
-              xaxis: {
-                type: 'datetime'
-              },
-              yaxis: {
-                tooltip: {
-                  enabled: true
-                }
+      chart: {
+        type: 'candlestick',
+        height: 350,
+        toolbar: {
+          show: true,
+          offsetX: 0,
+          offsetY: 0,
+          tools: {
+            download: true,
+            selection: true,
+            zoom: true,
+            zoomin: true,
+            zoomout: true,
+            pan: true,
+            reset: true | '<img src="/static/icons/reset.png" width="20">',
+            customIcons: []
+          },
+          export: {
+            csv: {
+              filename: undefined,
+              columnDelimiter: ',',
+              headerCategory: 'category',
+              headerValue: 'value',
+              dateFormatter(timestamp) {
+                return new Date(timestamp).toDateString()
               }
-            };
+            },
+            svg: {
+              filename: undefined,
+            },
+            png: {
+              filename: undefined,
+            }
+          },
+          autoSelected: 'selection'
+        },
+        
+        events: {
+          click: function (event, chartContext, config) {
+            // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
+            console.log(event);
+            console.log(chartContext);
+            console.log(config);
+          },
+          scrolled: function (chartContext, { xaxis }) {
+            console.log('scrolled')
+            console.log(chartContext)
+            console.log(xaxis)
+          },
+          brushScrolled: function (chartContext, { xaxis, yaxis }) {
+            console.log('brushScrolled')
+            console.log(chartContext)
+            console.log(xaxis, yaxis)
+          }
+        },
+      },
+      title: {
+        text: 'CandleStick Chart',
+        align: 'left'
+      },
+      xaxis: {
+        type: 'datetime'
+      },
+      yaxis: {
+        tooltip: {
+          enabled: true
+        }
+      }
+    };
     setOptions(optionsForCandle);
   }, [])
 
@@ -120,7 +164,7 @@ export default function CandleStick() {
     <>
       <div style={{ height: '40%', width: '80%' }}>
         <ReactApexChart options={options} series={graphData} type="candlestick" height={350} />
-       </div>
+      </div>
     </>
   )
 }
