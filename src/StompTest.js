@@ -1,21 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import SockJsClient from 'react-stomp';
 
-function StompTest() {
+export default class StompTest extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    message = {from: "react client", text: "hello"};
 
-  const sendMessage = (msg) => {
-    this.clientRef.sendMessage('/sub/fromclient', msg);
-  }
+    sendMessage = (msg) => {
+        console.log('sendmessage work');
+        // this.clientRef.sendMessage('/app/symbol', msg);
+        this.clientRef.sendMessage('/app/symbol', JSON.stringify(this.message));
+    }
 
-  return (
-    <div>
-      {/* <SockJsClient url='http://localhost:61613/ws' topics={['/topics/all']} */}
-      <SockJsClient url='https://14a1-124-61-155-176.ngrok.io/chat' topics={['/pub/toclient']}
-        onMessage={(msg) => { console.log(msg); }}
-        />
-        {/* ref={(client) => { this.clientRef = client }} /> */}
-    </div>
-  );
+    render() {
+        return (
+            <div>
+                <SockJsClient url='http://localhost:4000/kppcoin' topics={['/topic/chart']}
+                    onMessage={(msg) => { console.log(msg); }}
+                    ref={(client) => { this.clientRef = client }} />
+                <button onClick={() => this.sendMessage()}>
+                    Activate Lasers
+                </button>
+            </div>
+        );
+    }
 }
-
-export default StompTest;
