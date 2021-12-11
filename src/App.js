@@ -1,5 +1,5 @@
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import React, { useState, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import faker from 'faker/locale/ko';
 
 import Table from './Table';
@@ -42,14 +42,20 @@ function App() {
     []
   );
 
+  const [socketData, setSocketData] = useState([]);
+
+  useEffect(() => {
+    console.log('socketData', socketData);
+  }, [])
+
   return (
     <div>
       {/* <WebSocketTest /> */}
-      <StompTest />
-      <Chat></Chat>
+      <StompTest socketData={socketData} setSocketData={setSocketData}/>
+      {/* <Chat></Chat> */}
       {/* <Chart></Chart> */}
       {/* <CandleStick></CandleStick> */}
-      <CandleStickApex></CandleStickApex>
+      <CandleStickApex socketData={socketData}></CandleStickApex>
       <Table columns={columns} data={data} />
     </div>
   );

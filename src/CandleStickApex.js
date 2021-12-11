@@ -1,51 +1,44 @@
 import React, { useEffect, useState } from 'react';
-// import { VictoryCandlestick, VictoryChart, VictoryTheme, VictoryAxis, VictoryZoomContainer } from 'victory';
 import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
-// import {ReactApexChart} from 'react-apexcharts';
-// const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
-
 import moment from 'moment';
-
-export default function CandleStick() {
+import sampleData from './sample_data.json';
+export default function CandleStick({socketData}) {
   // todo: fetching...
   const [graphData, setGraphData] = useState([]);
   const [series, setSeries] = useState([]);
   const [options, setOptions] = useState({});
 
-  // const graphData =
-  //   [
-  //     { x: new Date(2021, 8, 21, 1), open: 5, close: 10, high: 15, low: 0 },
-  //     { x: new Date(2021, 8, 21, 2), open: 10, close: 15, high: 20, low: 5 },
-  //     { x: new Date(2021, 8, 21, 3), open: 15, close: 20, high: 22, low: 10 },
-  //     { x: new Date(2021, 8, 21, 4), open: 20, close: 10, high: 25, low: 7 },
-  //     { x: new Date(2021, 8, 21, 5), open: 10, close: 8, high: 15, low: 5 },
-  //     { x: new Date(2021, 8, 21, 6), open: 5, close: 10, high: 15, low: 0 },
-  //     { x: new Date(2021, 8, 21, 7), open: 10, close: 15, high: 20, low: 5 },
-  //     { x: new Date(2021, 8, 21, 8), open: 15, close: 20, high: 22, low: 10 },
-  //     { x: new Date(2021, 8, 21, 9), open: 20, close: 10, high: 25, low: 7 },
-  //     { x: new Date(2021, 8, 21, 10), open: 10, close: 8, high: 15, low: 5 },
-  //     { x: new Date(2021, 8, 21, 11), open: 5, close: 10, high: 15, low: 0 },
-  //     { x: new Date(2021, 8, 21, 12), open: 10, close: 15, high: 20, low: 5 },
-  //     { x: new Date(2021, 8, 21, 13), open: 15, close: 20, high: 22, low: 10 },
-  //     { x: new Date(2021, 8, 21, 14), open: 20, close: 10, high: 25, low: 7 },
-  //     { x: new Date(2021, 8, 21, 15), open: 10, close: 8, high: 15, low: 5 },
-  //     { x: new Date(2021, 8, 21, 16), open: 5, close: 10, high: 15, low: 0 },
-  //     { x: new Date(2021, 8, 21, 17), open: 10, close: 15, high: 20, low: 5 },
-  //     { x: new Date(2021, 8, 21, 18), open: 15, close: 20, high: 22, low: 10 },
-  //     { x: new Date(2021, 8, 21, 19), open: 20, close: 10, high: 25, low: 7 },
-  //     { x: new Date(2021, 8, 21, 20), open: 10, close: 8, high: 15, low: 5 },
-  //   ];
+  // const graphData = sampleData;
+  // [
+  //   { x: new Date(2021, 8, 21, 1), open: 5, close: 10, high: 15, low: 0 },
+  //   { x: new Date(2021, 8, 21, 2), open: 10, close: 15, high: 20, low: 5 },
+  //   { x: new Date(2021, 8, 21, 3), open: 15, close: 20, high: 22, low: 10 },
+  //   { x: new Date(2021, 8, 21, 4), open: 20, close: 10, high: 25, low: 7 },
+  //   { x: new Date(2021, 8, 21, 5), open: 10, close: 8, high: 15, low: 5 },
+  //   { x: new Date(2021, 8, 21, 6), open: 5, close: 10, high: 15, low: 0 },
+  //   { x: new Date(2021, 8, 21, 7), open: 10, close: 15, high: 20, low: 5 },
+  //   { x: new Date(2021, 8, 21, 8), open: 15, close: 20, high: 22, low: 10 },
+  //   { x: new Date(2021, 8, 21, 9), open: 20, close: 10, high: 25, low: 7 },
+  //   { x: new Date(2021, 8, 21, 10), open: 10, close: 8, high: 15, low: 5 },
+  //   { x: new Date(2021, 8, 21, 11), open: 5, close: 10, high: 15, low: 0 },
+  //   { x: new Date(2021, 8, 21, 12), open: 10, close: 15, high: 20, low: 5 },
+  //   { x: new Date(2021, 8, 21, 13), open: 15, close: 20, high: 22, low: 10 },
+  //   { x: new Date(2021, 8, 21, 14), open: 20, close: 10, high: 25, low: 7 },
+  //   { x: new Date(2021, 8, 21, 15), open: 10, close: 8, high: 15, low: 5 },
+  //   { x: new Date(2021, 8, 21, 16), open: 5, close: 10, high: 15, low: 0 },
+  //   { x: new Date(2021, 8, 21, 17), open: 10, close: 15, high: 20, low: 5 },
+  //   { x: new Date(2021, 8, 21, 18), open: 15, close: 20, high: 22, low: 10 },
+  //   { x: new Date(2021, 8, 21, 19), open: 20, close: 10, high: 25, low: 7 },
+  //   { x: new Date(2021, 8, 21, 20), open: 10, close: 8, high: 15, low: 5 },
+  // ];
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await axios.get('https://8f56-118-32-89-72.ngrok.io/rest2');
+        const { data } = await axios.get('http://6ac3-1-229-199-94.ngrok.io/rest2');
         console.log(data);
 
-        // const newData = data.map(({ close, high, open, low, candleDateTimeKst }, idx) => ({
-        //   x: new Date(candleDateTimeKst), open, close, high, low
-        // }));
         const newData = data.map(({ close, high, open, low, candleDateTimeKst }, idx) => ({
           x: new Date(candleDateTimeKst),
           y: [open, high, close, low]
@@ -53,6 +46,9 @@ export default function CandleStick() {
 
         const seriesData = [{ data: newData }];
         console.log(seriesData);
+
+        setGraphData(newData.slice(0, 5));
+        setGraphData(seriesData);
 
         /*
            TODO:
@@ -69,13 +65,11 @@ export default function CandleStick() {
            5. 그래프 이쁘게 꾸미기
 
         */
-
-        // setGraphData(newData.slice(0, 5));
-        setGraphData(seriesData);
       } catch (e) {
         console.log(e);
       }
     }
+
 
     fetchData();
     const optionsForCandle = {
@@ -115,7 +109,7 @@ export default function CandleStick() {
           },
           autoSelected: 'selection'
         },
-        
+
         events: {
           click: function (event, chartContext, config) {
             // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
@@ -165,6 +159,7 @@ export default function CandleStick() {
       <div style={{ height: '40%', width: '80%' }}>
         <ReactApexChart options={options} series={graphData} type="candlestick" height={350} />
       </div>
+      {JSON.stringify(socketData)}
     </>
   )
 }
